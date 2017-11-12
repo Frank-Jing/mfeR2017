@@ -187,12 +187,13 @@ y
 myabs <- function(x) {
   if(x < 0) {
     myabs <- -x
+  }else{ 
+    myabs <- x
   }
-  x
   return(myabs)
 }
 x <- -10
-myabs(x)
+x %>% myabs()
 ```
 
 ## Ifelse Statements
