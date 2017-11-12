@@ -21,17 +21,23 @@ getwd()
 # Packages used in week 2
 setwd("D:/Git_Projects/mfeR2017/Practice/week2")
 getwd()
+
 library(magrittr)
 library(microbenchmark)
 ## show time spend for two method, ex loop vs vectorize
+library(qrmtools)
 
 # Packages used in week 3
 setwd("D:/Git_Projects/mfeR2017/Practice/week3")
 getwd()
 
+# Packages used in week 4
+library(data.table)
+
 
 # Packages used in week 5
 setwd("D:/Git_Projects/mfeR2017/Practice/week5")
 getwd()
+
 library(data.table)
 library(lubridate)
