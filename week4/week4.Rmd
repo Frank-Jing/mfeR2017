@@ -262,7 +262,8 @@ mydate + days(1:5)
 ```{r}
 jan31 <- ymd("2013-01-31")
 jan31 + months(1)
-ceiling_date(jan31, "month") - days(1)
+ceiling_date(jan31, "month") - days(1) 
+# Rounding to the nearest unit or multiple of a unit are supported
 floor_date(jan31, "month") + months(2) - days(1)
 ```
 

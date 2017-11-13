@@ -33,6 +33,10 @@ getwd()
 
 # Packages used in week 4
 library(data.table)
+library(lubridate)
+library(zoo)
+library(xts)
+library(PerformanceAnalytics)
 
 
 # Packages used in week 5
