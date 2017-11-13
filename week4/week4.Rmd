@@ -398,7 +398,9 @@ x + merge(y, index(x), fill = na.locf)
     - `fill`, which handles missing data.
     - `join`, the type of join we want to do. The default is *outer* join.
 ```{r}
-colnames(x) <- "x"; colnames(y) <- "y"; colnames(z) <- "z"
+colnames(x) <- "x"; 
+colnames(y) <- "y"; 
+colnames(z) <- "z"
 merge(x, y, z)
 ```
 
