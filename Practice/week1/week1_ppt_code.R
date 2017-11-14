@@ -6,9 +6,6 @@ example(seq) # runs the examples in R
 
 rm(x) # removes x
 
-
-
-
 ## 3 classes of variable types in R
 x <- as.Date("2010-12-21")
 class(x)
@@ -25,8 +22,6 @@ x # number of days since Jan 1, 1970
 
 x <- as.integer(x) # x <- 14964L assigns an integer
 class(x)
-
-
 
 
 ## Vectors in R
