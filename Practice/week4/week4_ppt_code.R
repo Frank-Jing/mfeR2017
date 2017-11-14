@@ -26,6 +26,8 @@ substr("Equator",start = 3,stop = 5)
 strsplit("10-05-2017",split="-")
 
 #--------------------------------------------------------------------
+#--------------------------------------------------------------------
+#--------------------------------------------------------------------
 ## Dates
 
 mychar <- "October 5th, 2017"
@@ -54,6 +56,7 @@ seq(as.Date("2000/1/1"), by = "month", length.out = 4)
 ## quarters
 seq(as.Date("2000/1/1"), as.Date("2001/1/1"), by = "quarter")
 
+#--------------------------------------------------------------------
 ## package "lubridate"
 library(lubridate)
 ymd("20110604") 
@@ -81,6 +84,7 @@ ceiling_date(jan31, "month") - days(1)  # returns 2013-01-31
 # Rounding to the nearest unit or multiple of a unit are supported
 floor_date(jan31, "month") + months(2) - days(1) #returns 2013-02-28
 
+#--------------------------------------------------------------------
 ## package "XTS"
 ### Construction
 x <- matrix(1:4, nrow=2, ncol=2)
@@ -101,6 +105,7 @@ edhec[c("1997-01-31","1997-02-28") , 1]
 
 ### first()
 first(edhec[, "Convertible Arbitrage" ], "3 months")
+last()
 
 ### intersection of date
 x <- edhec["199701/02", 1]
@@ -129,8 +134,79 @@ x + merge(y, index(x), fill = na.locf)
 # 1997-01-31                    NA  <- NA + x  = NA
 # 1997-02-28                0.0246
 
+## merge and give variable names
+colnames(x) <- "x"; 
+colnames(y) <- "y"; 
+colnames(z) <- "z"
+merge(x, y, z)
+merge(x, y, z, fill = na.locf)
+merge(x, y, join='left')
+merge(x, y, join='right')
+
+x <- c(1, NA, NA, 4)
+idx <- seq(as.Date("2016-10-27"), length=4, by="days")
+x <- xts(x, order.by = idx)
+colnames(x) <- "x"
+cbind(x, na.locf(x), na.locf(x, fromLast = TRUE)) 
+
+## for NA values
+na.fill(x, -999)
+na.omit(x)
+na.approx(x)
+na.spline(x)
+
+## lag()
+lag(x, k = -1, na.pad = FALSE)  # delect the (last) line with NA value
+lag(x, k = -1, na.pad = TRUE)   # keep the vector with the same length as origin
+
+diff(x)  # default diff(x, lag = 1, differences = 1, arithmetic = TRUE, log = FALSE, na.pad = TRUE, ...)
+diff(x, lag = 1)
+
+diff(x, diff=2) ## take two diff(), same as below or (x- lag(x, 1)) - (lag(x, 1) - lag(x, 2))
+diff(diff(x))
 
 
+## endpoint() and period.apply()
+edhec9701 <- edhec["1997/2001", c(1,3)]
+# determine the endpoints
+ep <- endpoints(edhec9701, "years")
+period.apply(edhec9701, INDEX = ep, FUN = mean)
+
+## split() : much easier than endpoint method
+edhec.yrs <- split(edhec[,1], f="years")   # return a list contain every month value of each year
+edhec.yrs <- lapply(edhec.yrs, cumsum)     # cumsum every list
+edhec.ytd <- do.call(rbind, edhec.yrs)     # recombine the list into xts object
+edhec.ytd["200209/200303", 1]
+
+## rollapply()
+rollapply(edhec["200301/06", 1], 3, mean)
+## roll over every 3 values in the column, so fisrt 2 return value would be NA
+
+#--------------------------------------------------------------------
+## use of package "quantmod"
+library(quantmod)
+# get the stock history price
+getSymbols("IBM", src = "google", from = "2008-01-01")
+getSymbols("GOOG",src="google")
+getSymbols("AAPL",src="google")
+plot(AAPL$AAPL.Close)
+
+
+# `to.period` changes the periodicity of a univariate or OHLC (open, high, low, close) object.
+eom <- to.period(AAPL,'months')
+head(eom,3)
+## choose value from the end of each month
+
+#--------------------------------------------------------------------
+#--------------------------------------------------------------------
+#--------------------------------------------------------------------
+# Plot
+# - `cex`: sizing of text and symbols
+# - `pch`: point type.
+# - `lty`: line type. 0=blank, 1=solid (default), 2=dashed, 3=dotted, 4=dotdash, 5=longdash, 6=twodash
+# - `lwd`: line width.
+# - `mar`: margins.
+# - `bg`: background color
 
 
 

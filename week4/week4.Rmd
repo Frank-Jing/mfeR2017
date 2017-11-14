@@ -415,7 +415,8 @@ merge(x, y, join='right')
 ```{r}
 x <- c(1, NA, NA, 4)
 idx <- seq(as.Date("2016-10-27"), length=4, by="days")
-x <- xts(x, order.by = idx); colnames(x) <- "x"
+x <- xts(x, order.by = idx);
+colnames(x) <- "x"
 cbind(x, na.locf(x), na.locf(x, fromLast = TRUE))
 ```
 ## Other `NA` Options
@@ -441,7 +442,7 @@ na.approx(x)
     - 'na.pad' pads the vector back to the original size
 ```{r}
 x <- na.approx(x)
-cbind(x, lag(x,1), lag(x,-1))
+cbind(x, lag(x, 1), lag(x, -1))
 ```
 
 ## Diffferencing Series
@@ -460,7 +461,7 @@ cbind(x, diff(x))
 edhec9701 <- edhec["1997/2001", c(1,3)]
 # determine the endpoints
 ep <- endpoints(edhec9701, "years")
-period.apply(edhec9701, INDEX=ep, FUN=mean)
+period.apply(edhec9701, INDEX = ep, FUN = mean)
 ```
 
 ## `do.call`: A Useful `R` Trick
@@ -676,7 +677,7 @@ curve(cos(x), -2*pi, 2*pi)
 - Let's plot the cumulative (gross) return of IBM and the S\&P 500 since 1980.
 ```{r,message=FALSE}
 library(quantmod)
-getSymbols(c("^GSPC", "IBM"), src="yahoo", 
+getSymbols(c("^GSPC", "IBM"), src="google", 
            from = "1979-12-31")
 adj_close <- merge(GSPC$GSPC.Adjusted, IBM$IBM.Adjusted)
 daily_returns <- diff(adj_close)/lag(adj_close)

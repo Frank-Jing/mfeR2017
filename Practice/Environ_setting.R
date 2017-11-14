@@ -37,6 +37,7 @@ library(lubridate)
 library(zoo)
 library(xts)
 library(PerformanceAnalytics)
+library(quantmod)
 
 
 # Packages used in week 5
