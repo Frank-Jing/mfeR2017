@@ -18,3 +18,6 @@ data <- xts(data.origin[, -1], order.by = indx)
 
 
 
+data <- read.csv(file = "/Users/Weixiang/Documents/Git Projects/mfeR2017/Practice/week4/Lab2_prac/lab2data.csv", 
+                 stringsAsFactors = FALSE, 
+                 header = TRUE)
