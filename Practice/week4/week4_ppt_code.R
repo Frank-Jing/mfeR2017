@@ -156,7 +156,7 @@ na.approx(x)
 na.spline(x)
 
 ## lag()
-lag(x, k = -1, na.pad = FALSE)  # delect the (last) line with NA value
+lag(x, k = -1, na.pad = FALSE)  # delete the (last) line with NA value
 lag(x, k = -1, na.pad = TRUE)   # keep the vector with the same length as origin
 
 diff(x)  # default diff(x, lag = 1, differences = 1, arithmetic = TRUE, log = FALSE, na.pad = TRUE, ...)
