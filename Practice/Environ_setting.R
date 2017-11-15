@@ -43,6 +43,8 @@ library(quantmod)
 # Packages used in week 5
 setwd("D:/Git_Projects/mfeR2017/Practice/week5")
 getwd()
-
+library(DBI)
+library(jsonlite)
+library(Quandl)
 library(data.table)
 library(lubridate)
