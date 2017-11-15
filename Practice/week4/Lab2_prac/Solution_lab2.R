@@ -9,7 +9,7 @@ rm(list=ls())
 ## To read in the data I copied it into a file using excel
 ## saved it to a csv and then imported it
 ## note: you should change the working directly to the relevant one on your computer
-datain <- read.csv("D:/Git_Projects/mfeR2017/Practice/week4/Lab2_prac/lab2data.csv") 
+datain <- read.csv("./mfeR2017/week4/lab2/lab2data.csv") 
  
 ## just get a single subset of the data, the last row
 dataset <- tail(datain, n = 1)
@@ -39,7 +39,7 @@ maturity <- strsplit(maturity, " ")
 
 ## convert to durations using lubridate
 ## durations are in seconds
-durations <- sapply(maturity,function(x) duration(as.numeric(x[1]), x[2]))
+durations <- sapply(maturity,function(x) duration(as.numeric(x[1]),x[2]))
 
 ## finally get the start date plus the duration
 ## I round down to the nearest day because it also adds on time of day
@@ -47,7 +47,7 @@ outdates <- floor_date(firstdate+seconds(durations),"day")
 
 ## create the XTS object
 ## also note that I convert the yeilds to a vector
-yielddata <- as.xts(as.numeric(yields),order.by = outdates)
+yielddata <- as.xts(as.numeric(yields),order.by=outdates)
 
 ## now plot
 plot(yielddata, main = sprintf("Yield Curve for %s",firstdate))
@@ -64,7 +64,7 @@ fullsample <- merge(fullsample,yielddata)
 
 ## and now get the approximations
 fullsample_linear <- na.approx(fullsample)
-# fullsample_spline <- na.spline(fullsample)
+fullsample_spline <- na.spline(fullsample)
 
 ## merge together and plot with zoo
 allseries <- merge(yielddata, fullsample_linear)
