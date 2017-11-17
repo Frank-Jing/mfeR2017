@@ -33,7 +33,8 @@ strsplit("10-05-2017",split="-")
 mychar <- "October 5th, 2017"
 mydate <- as.Date(mychar, format = "%B %eth, %Y")
 # format	A character string.
-# If not specified, it will try "%Y-%m-%d" then "%Y/%m/%d" on the first non-NA element, and give an error if neither works.
+# If not specified, it will try "%Y-%m-%d" then "%Y/%m/%d" on the first non-NA element, 
+# and give an error if neither works.
 
 # extract parts from date
 mydate <- as.Date("2017-10-05")
