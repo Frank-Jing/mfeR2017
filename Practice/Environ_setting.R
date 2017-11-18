@@ -48,3 +48,13 @@ library(jsonlite)
 library(Quandl)
 library(data.table)
 library(lubridate)
+
+# packages used in week 6
+library(tidyr)
+library(dplyr)
+library(data.table)
+library(lubridate)
+library(tidyverse)
+library(broom)
+library(readr)
+
