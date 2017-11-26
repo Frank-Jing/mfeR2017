@@ -1,3 +1,10 @@
+
+# code for week 3
+### Theme of the week
+### 1. Matrix and its syntax
+### 2. data.frame
+### 3. tibble and its difference with data.frame
+
 mymat <- matrix(1:10, nrow=2)
 # mean across rows (can also use rowMeans() function)
 apply(mymat, 1, mean)  # apply mean along rows
@@ -51,17 +58,31 @@ gradeBook <- data.frame(courses, examGrades,
 gradeBook
 ## choose stringsAsFactors = FALSE most of time
 
+gradeBook[[1]]           # first way
+gradeBook[["courses"]]   # second way
+gradeBook$courses
 
 # preserve the data.frame class, set drop = FALSE
-gradeBook[,2] # returns a vector
+gradeBook[, 2] # returns a vector
 ## [1] 92 98
-gradeBook[,2,drop=FALSE] # returns a data.frame
+gradeBook[, 2, drop = FALSE] # returns a data.frame
 ## examGrades
 ## 1 92
 ## 2 98
 
+
+# subset a data.frame
+
+set.seed(1234)
+x.df <-data.frame(V1 =rnorm(4), 
+                  V2 =runif(4),
+                  V3 =rchisq(4,df = 2), 
+                  V4 = 1:4)
+x.df
+
 ## select both rows and cols
-x.sub2 <- subset(x.df, V4 > 2 & V1 > 0.6,
+x.sub2 <- subset(x.df, 
+                 V4 > 2 & V1 > 0.6,
                  select = c(V2, V3))
 
 x.sub3 <- x.df[x.df$V4 == 2, ]
@@ -70,8 +91,10 @@ x.sub4 <- x.df[x.df$V4 %in% c(1, 4), ] #observations for which the values of var
 x.sub5 <- x.df[, -c(1,3)] #remove the first and third columns
 
 # Let's makes the second col in row 1 an NA
+# complete.cases() gets rid of any rows with at least one NA value.
 x.df[1,2] <- NA
 x.df[complete.cases(x.df), ] # removes row 1
+
 
 ## merge two data.frame with same category
 courses <- c("Stochastic Calculus", "Fixed Income")
@@ -92,4 +115,16 @@ optdata <- read.csv(file="../week2/lab/optionsdata.csv",
                     header = T, stringsAsFactors = FALSE)
 
 
+# tibble
+tibble(x = 1:3, y = list(1:5, 1:10, 1:20))
 
+tibble(x = 1:5, y = 1, z = x ^ 2 + y)
+
+df <-data.frame(colName = 1:5, m = 2:6)df$c
+## [1] 1 2 3 4 5
+# [[extracts a single column as a vector.
+# `$` works similarly to `[[`, but does *partial matching* on the column name.
+tbl <- as_tibble(df); tbl$c
+# Tibbles never do partial matching, and will throw a warning and return `NULL` if the column does not exist.
+## Warning: Unknown or uninitialised column:'c'.
+## NULL45 / 50

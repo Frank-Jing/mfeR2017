@@ -12,10 +12,8 @@ class(x)
 
 x <- "2010-12-21"
 class(x)
-
 x <- as.Date(x)
 class(x)
-
 x <- as.numeric(x)
 class(x)
 x # number of days since Jan 1, 1970
@@ -31,7 +29,7 @@ x
 y <- rep(c(1, 2), times = 3)
 y
 
-rep(c(1,2), each=2)
+rep(c(1,2), each = 2)
 
 x <- c(TRUE, FALSE, TRUE, FALSE)
 length(x)

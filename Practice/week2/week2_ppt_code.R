@@ -1,9 +1,15 @@
+# code for week 2
+### Theme of the week
+### 1. Build a function
+### 2. usage of 'magrittr' in r (%>% %in% %<>%)
+### 3. unitroot and optim
+
 # Functions
 `<-`(mynumber, 3)
 print(mynumber)
 `+`(3,4)
 a <- `:`(11,20)
-`[`(a,5)
+`[`(a,5) # [1] 15
 
 myfunc <- function(x) x^2
 myfunc(10)
@@ -45,7 +51,7 @@ iris$Sepal.Length %<>% sqrt
 
 ## ifelse
 x <- 1:10 # Creates sample data
-ifelse(x<5 | x>8, x, 0)
+ifelse(x<5 | x>8, x, 0) # ifelse(test, yes, no)
 
 
 # some optimization functions
@@ -63,4 +69,18 @@ fr <- function(x) {   ## Rosenbrock Banana function
   x2 <- x[2]
   100 * (x2 - x1 * x1)^2 + (1 - x1)^2
 }
+grr <- function(x) { ## Gradient of 'fr'
+    x1 <- x[1]
+    x2 <- x[2]
+    c(-400 * x1 * (x2 - x1 * x1) - 2 * (1 - x1),
+       200 *      (x2 - x1 * x1))
+}
+optim(c(-1.2,1), fr)
+(res <- optim(c(-1.2,1), fr, grr, method = "BFGS"))
+optimHess(res$par, fr, grr) # return a Hessian Matrix
+optim(c(-1.2,1), fr, NULL, method = "BFGS", hessian = TRUE)
+## These do not converge in the default number of steps
+optim(c(-1.2,1), fr, grr, method = "CG")
+optim(c(-1.2,1), fr, grr, method = "CG", control = list(type = 2))
+optim(c(-1.2,1), fr, grr, method = "L-BFGS-B")
 optim(c(-1.2,1), fr)$par

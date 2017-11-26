@@ -1,5 +1,16 @@
+
+# code for week 4
+### Theme of the week
+### 1. Strings
+### 2. Dates
+### 3. Plotting with Dates
+### 4. Time-Series Data in R (xts)
+### 5. Plotting in R
+
+
 # Manipulate strings
 grep() # Searches for a substring, like the Linux command of the same name.
+       # return a vector of length up ton
 gsub() # Replaces all matches of a substring with another string.
 nchar() # Finds the length of a string.
 paste()
@@ -9,25 +20,33 @@ substr() # Extracts a substring.
 strsplit() # Splits a string into substrings.
 
 grep("Pole",c("Equator","North Pole","South Pole"))
+## [1] 2 3
 
 gsub(" Pole","",c("Equator","North Pole","South Pole"))
 
 nchar("South Pole")
 
-paste("North","and","South","Poles")
+paste("North","and","South","Poles") # contains blank 
+## [1] "North and South Poles"
 paste("North","Pole",sep="")
-# paste0 is same as sep="" (more efficient)
+## [1] "NorthPole"
+## paste0 is same as sep="" (more efficient)
 paste0("North","Pole") == paste("North","Pole",sep="") 
 
 sprintf("the square of %d is %d",i,i^2)
 
 substr("Equator",start = 3,stop = 5)
-
+## "uat"
 strsplit("10-05-2017",split="-")
+## return a list
+## [[1]]
+## [1] "10"   "05"   "2017"
+
 
 #--------------------------------------------------------------------
 #--------------------------------------------------------------------
 #--------------------------------------------------------------------
+
 ## Dates
 
 mychar <- "October 5th, 2017"
@@ -149,6 +168,7 @@ idx <- seq(as.Date("2016-10-27"), length=4, by="days")
 x <- xts(x, order.by = idx)
 colnames(x) <- "x"
 cbind(x, na.locf(x), na.locf(x, fromLast = TRUE)) 
+# last observation carried forward
 
 ## for NA values
 na.fill(x, -999)
